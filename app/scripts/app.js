@@ -1,7 +1,7 @@
 'use strict';
 angular.module('confusionApp', [])
-  .controller('menuController', function() {
-    var dishes = [{
+  .controller('MenuController', ['$scope', function($scope) {
+    $scope.dishes = [{
         name:'Uthapizza',
         image: 'images/uthapizza.png',
         category: 'mains',
@@ -35,19 +35,23 @@ angular.module('confusionApp', [])
         comment: ''
       }
     ];
-    this.dishes = dishes;
-    this.tab = 1;
-    this.filtText = '';
+    $scope.tab = 1;
+    $scope.filtText = '';
+    $scope.showDetails = false;
 
-    this.select = function(setTab) {
-      this.tab = setTab;
-      if (setTab === 2) {this.filtText = "appetizer";}
-      else if (setTab === 3) {this.filtText = "mains";}
-      else if (setTab === 4) {this.filtText = "dessert";}
-      else {this.filtText = "";}
+    $scope.select = function(setTab) {
+      $scope.tab = setTab;
+      if (setTab === 2) {$scope.filtText = "appetizer";}
+      else if (setTab === 3) {$scope.filtText = "mains";}
+      else if (setTab === 4) {$scope.filtText = "dessert";}
+      else {$scope.filtText = "";}
     };
 
-    this.isSelected = function (checkTab) {
-      return (this.tab === checkTab);
+    $scope.isSelected = function (checkTab) {
+      return ($scope.tab === checkTab);
     };
-  });
+
+    $scope.toggleDetails = function() {
+      $scope.showDetails = !$scope.showDetails;
+    };
+  }]);
