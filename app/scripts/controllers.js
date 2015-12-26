@@ -33,7 +33,7 @@ angular.module('confusionApp')
   .controller('FeedbackController', ['$scope', function($scope) {
     $scope.sendFeedback = function() {
       console.log($scope.feedback);
-      if ($scope.feedback.agree && ($scope.feedback.mychannel == "")) {
+      if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
         $scope.invalidChannelSelection = true;
         console.log('incorrect');
       } else {
@@ -52,15 +52,15 @@ angular.module('confusionApp')
   }])
 
   .controller('DishCommentController', ['$scope', function($scope) {
-    $scope.newComment = { rating:5, author:"", comment:"", date:"" }
+    $scope.newComment = { rating:5, author:"", comment:"", date:"" };
 
     $scope.submitComment = function () {
       $scope.newComment.date = new Date().toISOString();
       $scope.newComment.rating = parseInt($scope.newComment.rating);
       $scope.dish.comments.push($scope.newComment);
       $scope.commentForm.$setPristine();
-      $scope.newComment = { rating:5, author:"", comment:"", date:"" }
+      $scope.newComment = { rating:5, author:"", comment:"", date:"" };
       console.log($scope.dish.comments);
-    }
+    };
   }])
 ;

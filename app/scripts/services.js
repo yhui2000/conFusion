@@ -140,11 +140,11 @@ angular.module('confusionApp')
 
 	    menufac.getDishes = function(){
 	    	return dishes;
-	    }
+	    };
 
 	    menufac.getDish = function(index){
 	    	return dishes[index];
-	    }
+	    };
 
 	    return menufac;
 	})
