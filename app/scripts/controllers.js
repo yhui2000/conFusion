@@ -14,7 +14,7 @@ angular.module('confusionApp')
           else {$scope.filtText = "";}
         };
 
-        $scope.isSelected = function (checkTab) {
+        $scope.isSelected = function(checkTab) {
           return ($scope.tab === checkTab);
         };
 
@@ -46,8 +46,8 @@ angular.module('confusionApp')
         };
     }])
 
-    .controller('DishDetailController', ['$scope', '$routeParams', 'menuFactory', function($scope, $routeParams, menuFactory) {
-        var id = parseInt($routeParams.id,10);
+    .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
+        var id = parseInt($stateParams.id,10);
         var dish = menuFactory.getDish(id);
         $scope.dish = dish;
     }])
@@ -55,7 +55,7 @@ angular.module('confusionApp')
     .controller('DishCommentController', ['$scope', function($scope) {
         $scope.newComment = { rating:5, author:"", comment:"", date:"" };
 
-        $scope.submitComment = function () {
+        $scope.submitComment = function() {
           $scope.newComment.date = new Date().toISOString();
           $scope.newComment.rating = parseInt($scope.newComment.rating);
           $scope.dish.comments.push($scope.newComment);

@@ -27,7 +27,7 @@ gulp.task('clean', function() {
 });
 
 gulp.task('usemin',['jshint'], function () {
-  return gulp.src('./app/*.html')
+  return gulp.src('./app/**/*.html')
     .pipe(usemin({
       css:[minifycss(),rev()],
       js: [ngannotate(),uglify(),rev()]
