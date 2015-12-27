@@ -7,19 +7,19 @@ angular.module('confusionApp')
         $scope.showDetails = false;
 
         $scope.select = function(setTab) {
-          $scope.tab = setTab;
-          if (setTab === 2) {$scope.filtText = "appetizer";}
-          else if (setTab === 3) {$scope.filtText = "mains";}
-          else if (setTab === 4) {$scope.filtText = "dessert";}
-          else {$scope.filtText = "";}
+            $scope.tab = setTab;
+            if (setTab === 2) {$scope.filtText = "appetizer";}
+            else if (setTab === 3) {$scope.filtText = "mains";}
+            else if (setTab === 4) {$scope.filtText = "dessert";}
+            else {$scope.filtText = "";}
         };
 
         $scope.isSelected = function(checkTab) {
-          return ($scope.tab === checkTab);
+            return ($scope.tab === checkTab);
         };
 
         $scope.toggleDetails = function() {
-          $scope.showDetails = !$scope.showDetails;
+            $scope.showDetails = !$scope.showDetails;
         };
     }])
 
@@ -32,17 +32,17 @@ angular.module('confusionApp')
 
     .controller('FeedbackController', ['$scope', function($scope) {
         $scope.sendFeedback = function() {
-          console.log($scope.feedback);
-          if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
-            $scope.invalidChannelSelection = true;
-            console.log('incorrect');
-          } else {
-            $scope.invalidChannelSelection = false;
-            $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
-            $scope.feedback.mychannel="";
-            $scope.feedbackForm.$setPristine();
             console.log($scope.feedback);
-          }
+            if ($scope.feedback.agree && ($scope.feedback.mychannel === "")) {
+                $scope.invalidChannelSelection = true;
+                console.log('incorrect');
+            } else {
+                $scope.invalidChannelSelection = false;
+                $scope.feedback = {mychannel:"", firstName:"", lastName:"", agree:false, email:"" };
+                $scope.feedback.mychannel="";
+                $scope.feedbackForm.$setPristine();
+                console.log($scope.feedback);
+            }
         };
     }])
 
@@ -56,12 +56,22 @@ angular.module('confusionApp')
         $scope.newComment = { rating:5, author:"", comment:"", date:"" };
 
         $scope.submitComment = function() {
-          $scope.newComment.date = new Date().toISOString();
-          $scope.newComment.rating = parseInt($scope.newComment.rating);
-          $scope.dish.comments.push($scope.newComment);
-          $scope.commentForm.$setPristine();
-          $scope.newComment = { rating:5, author:"", comment:"", date:"" };
-          console.log($scope.dish.comments);
+            $scope.newComment.date = new Date().toISOString();
+            $scope.newComment.rating = parseInt($scope.newComment.rating);
+            $scope.dish.comments.push($scope.newComment);
+            $scope.commentForm.$setPristine();
+            $scope.newComment = { rating:5, author:"", comment:"", date:"" };
         };
+    }])
+
+    // implement the IndexController and AboutController here
+    .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
+        $scope.featDish = menuFactory.getDish(0);
+        $scope.featPromo = menuFactory.getPromotion(0);
+        $scope.execChef = corporateFactory.getLeader(3);
+    }])
+
+    .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
+        $scope.leaders = corporateFactory.getLeaders();
     }])
 ;

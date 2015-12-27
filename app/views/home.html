@@ -1,0 +1,60 @@
+<div class="container" ng-controller="IndexController">
+    <div class="row row-content">
+        <div class="col-xs-12 col-sm-3 col-sm-push-9">
+            <p style="padding:20px;"></p>
+            <h3 align=center>Our Lipsmacking Culinary Creations</h3>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+			<div class="media-left media-middle">
+                <a ui-sref="app.dishdetails({id: featDish._id})">
+                    <img class="media-object img-thumbnail" ng-src={{featDish.image}} alt="Featured Dish">
+                </a>
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading">{{featDish.name}}
+                    <span class="label label-danger">{{featDish.label}}</span>
+                    <span class="badge">{{featDish.price | currency}}</span></h2>
+                <p>{{featDish.description}}</p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row row-content">
+        <div class="col-xs-12 col-sm-3">
+            <p style="padding:20px;"></p>
+            <h3 align=center>This Month's Promotions</h3>
+        </div>
+        <div class="col-xs-12 col-sm-9">
+            <div class="media-body">
+                <h2 class="media-heading">{{featPromo.name}}
+                    <span class="label label-danger">{{featPromo.label}}</span>
+                    <span class="badge">{{featPromo.price | currency}}</span></h2>
+                <p>{{featPromo.description}}</p>
+            </div>
+            <div class="media-right media-middle">
+                <a href="">
+                    <img class="media-object img-thumbnail" ng-src={{featPromo.image}} alt="Featured Promotion">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row row-content">
+        <div class="col-xs-12 col-sm-3 col-sm-push-9">
+            <p style="padding:20px;"></p>
+            <h3 align=center>Meet our Culinary Specialists</h3>
+        </div>
+        <div class="col-xs-12 col-sm-9 col-sm-pull-3">
+			<div class="media-left media-middle">
+                <a href="">
+                    <img class="media-object img-thumbnail" ng-src={{execChef.image}} alt="{{execChef.abbr}}">
+                </a>
+            </div>
+            <div class="media-body">
+                <h2 class="media-heading">{{execChef.name}} <small>{{execChef.designation}}</small></h2>
+                <p>{{execChef.description}}</p>
+            </div>
+        </div>
+    </div>
+</div>
