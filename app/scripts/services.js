@@ -156,8 +156,6 @@ angular.module('confusionApp')
 			return dishes[index];
 		};
 
-		// implement a function named getPromotion
-		// that returns a selected promotion.
 		this.getPromotion = function(index){
 			return promotions[index];
 		};
@@ -192,9 +190,6 @@ angular.module('confusionApp')
 			description: "Award winning three-star Michelin chef with wide International experience having worked closely with whos-who in the culinary world, he specializes in creating mouthwatering Indo-Italian fusion experiences. He says, Put together the cuisines from the two craziest cultures, and you get a winning hit! Amma Mia!"
 		}];
 
-		// Implement two functions, one named getLeaders,
-		// the other named getLeader(index)
-		// Remember this is a factory not a service
 		corpfac.getLeaders = function(){
 			return leadership;
 		};

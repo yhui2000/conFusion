@@ -15,17 +15,19 @@ var gulp = require('gulp'),
   del = require('del'),
   ngannotate = require('gulp-ng-annotate');
 
+// Clean
+gulp.task('clean', function() {
+  return del(['dist']);
+});
+
+// JSHint
 gulp.task('jshint', function() {
   return gulp.src('app/scripts/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter(stylish));
 });
 
-// Clean
-gulp.task('clean', function() {
-  return del(['dist']);
-});
-
+// Concat, minify, uglify, etc
 gulp.task('usemin',['jshint'], function () {
   return gulp.src('./app/**/*.html')
     .pipe(usemin({
@@ -43,26 +45,20 @@ gulp.task('imagemin', function() {
     .pipe(notify({ message: 'Images task complete' }));
 });
 
+// Fonts
 gulp.task('copyfonts', ['clean'], function() {
-   gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
-   gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
-   .pipe(gulp.dest('./dist/fonts'));
+  gulp.src('./bower_components/font-awesome/fonts/**/*.{ttf,woff,eof,svg}*')
+    .pipe(gulp.dest('./dist/fonts'));
+  gulp.src('./bower_components/bootstrap/dist/fonts/**/*.{ttf,woff,eof,svg}*')
+    .pipe(gulp.dest('./dist/fonts'));
 });
 
 // Default task
 gulp.task('default', ['clean'], function() {
-  gulp.start('usemin', 'imagemin','copyfonts');
+  return gulp.start('usemin', 'imagemin', 'copyfonts');
 });
 
-// Watch
-gulp.task('watch', ['browser-sync'], function() {
-  // Watch .js files
-  gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}', ['usemin']);
-  // Watch image files
-  gulp.watch('app/images/**/*', ['imagemin']);
-});
-
+// BrowserSync setup
 gulp.task('browser-sync', ['default'], function () {
   var files = [
     'app/**/*.html',
@@ -81,4 +77,12 @@ gulp.task('browser-sync', ['default'], function () {
 
   // Watch any files in dist/, reload on change
   gulp.watch(['dist/**']).on('change', browserSync.reload);
+});
+
+// Watch task
+gulp.task('watch', ['browser-sync'], function() {
+  // Watch .js files
+  gulp.watch('{app/scripts/**/*.js,app/styles/**/*.css,app/**/*.html}', ['usemin']);
+  // Watch image files
+  gulp.watch('app/images/**/*', ['imagemin']);
 });
