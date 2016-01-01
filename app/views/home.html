@@ -13,7 +13,7 @@
                     <img class="media-object img-thumbnail" ng-src={{dish.image}} alt="Featured Dish">
                 </a>
             </div>
-            <div class="media-body">
+            <div class="media-body" ng-if="showDish">
                 <h2 class="media-heading">{{dish.name}}
                     <span class="label label-danger">{{dish.label}}</span>
                     <span class="badge">{{dish.price | currency}}</span></h2>
@@ -29,13 +29,16 @@
             <h3 align=center>This Month's Promotions</h3>
         </div>
         <div class="col-xs-12 col-sm-9">
-            <div class="media-body">
+            <div ng-if="!showPromo">
+                <h3>{{messagePromo}}</h3>
+            </div>
+            <div class="media-body" ng-if="showPromo">
                 <h2 class="media-heading">{{featPromo.name}}
                     <span class="label label-danger">{{featPromo.label}}</span>
                     <span class="badge">{{featPromo.price | currency}}</span></h2>
                 <p>{{featPromo.description}}</p>
             </div>
-            <div class="media-right media-middle">
+            <div class="media-right media-middle" ng-if="showPromo">
                 <a href="">
                     <img class="media-object img-thumbnail" ng-src={{featPromo.image}} alt="Featured Promotion">
                 </a>
@@ -49,12 +52,15 @@
             <h3 align=center>Meet our Culinary Specialists</h3>
         </div>
         <div class="col-xs-12 col-sm-9 col-sm-pull-3">
-			<div class="media-left media-middle">
+            <div ng-if="!showExec">
+                <h3>{{messageExec}}</h3>
+            </div>
+			<div class="media-left media-middle" ng-if="showExec">
                 <a href="">
                     <img class="media-object img-thumbnail" ng-src={{execChef.image}} alt="{{execChef.abbr}}">
                 </a>
             </div>
-            <div class="media-body">
+            <div class="media-body" ng-if="showExec">
                 <h2 class="media-heading">{{execChef.name}} <small>{{execChef.designation}}</small></h2>
                 <p>{{execChef.description}}</p>
             </div>
