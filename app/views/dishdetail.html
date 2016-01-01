@@ -22,11 +22,11 @@
             <h3>Costumer comments</h3>
             <p>Sort by: <input type="text" ng-model="orderText"></p>
             <ul class="media-list">
-                <li class="media" ng-repeat="cmt in dish.comments | orderBy:orderText">
+                <li class="media" ng-repeat="comment in dish.comments | orderBy:orderText">
                     <blockquote>
-                        <h4>{{cmt.rating}} Stars</h4>
-                        <p>{{cmt.comment}}</p>
-                        <footer>{{cmt.author}}, {{cmt.date | date}}</footer>
+                        <h4>{{comment.rating}} Stars</h4>
+                        <p>{{comment.comment}}</p>
+                        <footer>{{comment.author}}, {{comment.date | date}}</footer>
                     </blockquote>
                 </li>
             </ul>
