@@ -1,10 +1,21 @@
 'use strict';
 angular.module('confusionApp')
     .controller('MenuController', ['$scope', 'menuFactory', function($scope, menuFactory) {
-        $scope.dishes = menuFactory.getDishes();
         $scope.tab = 1;
         $scope.filtText = '';
         $scope.showDetails = false;
+        $scope.showMenu = false;
+        $scope.message = "Loading ...";
+        $scope.dishes = {};
+        menuFactory.getDishes().then(
+            function(response) {
+                $scope.dishes = response.data;
+                $scope.showMenu = true;
+            },
+            function(response) {
+                $scope.message = "Error: "+response.status + " " + response.statusText;
+            }
+        );
 
         $scope.select = function(setTab) {
             $scope.tab = setTab;
@@ -47,9 +58,18 @@ angular.module('confusionApp')
     }])
 
     .controller('DishDetailController', ['$scope', '$stateParams', 'menuFactory', function($scope, $stateParams, menuFactory) {
-        var id = parseInt($stateParams.id,10);
-        var dish = menuFactory.getDish(id);
-        $scope.dish = dish;
+        $scope.dish = {};
+        $scope.showDish = false;
+        $scope.message = "Loading ...";
+        menuFactory.getDish(parseInt($stateParams.id,10)).then(
+            function(response){
+                $scope.dish = response.data;
+                $scope.showDish = true;
+            },
+            function(response) {
+                $scope.message = "Error: "+response.status + " " + response.statusText;
+            }
+        );
     }])
 
     .controller('DishCommentController', ['$scope', function($scope) {
@@ -65,9 +85,20 @@ angular.module('confusionApp')
     }])
 
     .controller('IndexController', ['$scope', 'menuFactory', 'corporateFactory', function($scope, menuFactory, corporateFactory) {
-        $scope.featDish = menuFactory.getDish(0);
         $scope.featPromo = menuFactory.getPromotion(0);
         $scope.execChef = corporateFactory.getLeader(3);
+        $scope.dish = {};
+        $scope.showDish = false;
+        $scope.message = "Loading ...";
+        menuFactory.getDish(0).then(
+            function(response){
+                $scope.dish = response.data;
+                $scope.showDish = true;
+            },
+            function(response) {
+                $scope.message = "Error: "+response.status + " " + response.statusText;
+            }
+        );
     }])
 
     .controller('AboutController', ['$scope', 'corporateFactory', function($scope, corporateFactory) {
